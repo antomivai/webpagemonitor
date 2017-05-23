@@ -28,6 +28,7 @@ public class WebpagemonitorApplicationTests {
 		 String file2 = resourcesDirectory.getAbsolutePath() + "/file2.txt";
 		 String file3 = resourcesDirectory.getAbsolutePath() + "/file3.txt";
 
+		 //59 characters add to the end of the file
 		 double changePercentage = webPageParser.evaluateChangePercentage(file1,file2);
 		 Assert.assertTrue(round(changePercentage,2)==0.42);
 
