@@ -30,6 +30,10 @@ public class WebpagemonitorApplication {
 	String username;
 	@Value("${spring.mail.password}")
 	String password;
+	@Value("${webpagemonitor.polling.interval}")
+	int pollingInterval;
+	@Value("${webpagemonitor.url}")
+	String url;
 
 
 	public static void main(String[] args) {
@@ -63,7 +67,7 @@ public class WebpagemonitorApplication {
 
 		return (args) -> {
 			while(true) {
-				boolean hasSignificantChange = pageParser.evaluateChange("https://www.simpleweb.org/");
+				boolean hasSignificantChange = pageParser.evaluateChange(url);
 				if (hasSignificantChange) {
 					String subject = "Alert: Webpage Significantly Changed";
 					String message = "The webpage https://www.simpleweb.org/ has changed significantly since it was last observed.";
@@ -73,7 +77,7 @@ public class WebpagemonitorApplication {
 					String message = "The webpage https://www.simpleweb.org/ has NOT changed much.";
 					emailService.sendSimpleMessage(to, subject, message);
 				}
-				Thread.sleep(54000);
+				Thread.sleep(pollingInterval);
 			}
 		};
 	}
