@@ -1,0 +1,4 @@
+We can use the same mechanism to test other application components.
+We will mock their dependencies and verify that, given a specific input,
+they perform a specific flow and generate
+a specific output.
